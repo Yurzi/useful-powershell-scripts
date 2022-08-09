@@ -40,13 +40,15 @@ Begin {
 
 ## 生成的命令
 # 将空格去除
-$problem = $problem -join ' ';
+$problem = $problem -join '%20';
 $problem = $problem.ToCharArray();
 $string_builder = New-Object -TypeName "System.Text.StringBuilder";
 
 foreach($char in $problem) {
     if ($char -eq ' ') {
-        [void]$string_builder.Append('%20');
+        [void]$string_builder.Append('+');
+    }elseif ($char -eq "'") {
+        [void]$string_builder.Append('%27');
     }else {
         [void]$string_builder.Append($char);
     }
